@@ -10,9 +10,9 @@ const isValidJumiaProductURL = (url: string) => {
         const hostname = parsedURL.hostname;
 
         if (
-            hostname.includes('jumia.com.ng') ||
-            hostname.includes ('jumia.') ||
-            hostname.endsWith('jumia')
+            hostname.includes('konga.com') ||
+            hostname.includes('konga.') ||
+            hostname.endsWith('konga')
         ) {
             return true;
         }
@@ -23,43 +23,43 @@ const isValidJumiaProductURL = (url: string) => {
 }
 
 const Searchbar = () => {
-    const[searchPrompt, setSearchPrompt] =useState('');
-    const[isLoading, setIsLoading] = useState(false);
-    
-    const handleSubmit = async (event:FormEvent<HTMLFormElement>) => {
-       event.preventDefault();
+    const [searchPrompt, setSearchPrompt] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-       const isValidLink = isValidJumiaProductURL(searchPrompt);
-       
-       if(!isValidLink) return alert('Please provide a valid Jumia link')
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const isValidLink = isValidJumiaProductURL(searchPrompt);
+
+        if (!isValidLink) return alert('Please provide a valid Jumia link')
 
         try {
-           setIsLoading(true); 
-           
-           // scrape the product page
-           const product = await scrapeAndStoreProduct(searchPrompt);
+            setIsLoading(true);
+
+            // scrape the product page
+            const product = await scrapeAndStoreProduct(searchPrompt);
         } catch (error) {
             console.log(error);
-            
-        }finally {
-        setIsLoading(false);
+
+        } finally {
+            setIsLoading(false);
         }
-     };
+    };
 
     return (
         <form className='flex flex-wrap gap-4 mt-12' onSubmit={handleSubmit}>
-            <input 
-                type="text" 
+            <input
+                type="text"
                 value={searchPrompt}
-                onChange={(e) =>setSearchPrompt(e.target.value)}
-                placeholder="Enter product link" 
-                className="searchbar-input" 
-                required 
+                onChange={(e) => setSearchPrompt(e.target.value)}
+                placeholder="Enter product link"
+                className="searchbar-input"
+                required
             />
-            <button type="submit" 
-            className="searchbar-btn"
-            disabled={searchPrompt === ''}
-              
+            <button type="submit"
+                className="searchbar-btn"
+                disabled={searchPrompt === ''}
+
             >
                 {isLoading ? 'Searching....' : 'Search'}
             </button>
