@@ -10,52 +10,37 @@ export async function scrapeProduct(url: string) {
   try {
     // Fetch the product page
     const response = await axios.get(url, {
-      timeout: 100000, // optional timeout
+      timeout: 1000000, // optional timeout
     });
-    // const $ = cheerio.load(response.data);
-    console.log(response.data)
+    const $ = cheerio.load(response.data);
+    // console.log(response.data)
 
     // Extract the product title
-    const title = $('h1.-fs20.-pts.-pbxs').text().trim();
-    const currentPrice = extractPrice(
-      $('span.-b.-ubpt.-tal.-fs24.-prxs')
-    );
+    const title = $('h4._24849_2Ymhg').text().trim();
+    const currentPrice = extractPrice($('div._678e4_e6nqh > div'));
+    // const currentPrice = currentPrice0.substring(0, 6);
 
-    const originalPrice = extractPrice(
-      $('-tal.-gy5.-lthr.-fs16.-pvxs.-ubpt')
-    );
 
-    // const outOfStock = $('#availability span').text().trim().toLowerCase() === 'currently unavailable';
+    const originalPrice = extractPrice($('div._10344_3PAla > div'));
+    // const originalPrice = originalPrice0.substring(0, 6);
 
-    const image =
-      $('img.-fw.-fh').attr('data-scr') || '{}';
-    // ||
-    // $('#landingImage').attr('data-a-dynamic-image') ||
-    // '{}'
+    const image = $('picture img[data-expand="100"]').attr('src') || '{}';
 
     const imageUrl = Object.keys(JSON.parse(image));
-
-    const discountRate = $('span[data-disc]').text();
 
     // Construct data object with scraped information
     const data = {
       url,
-      // currency: currency || '$',
-      image: imageUrl[0],
+      image: image,
       title,
       currentPrice: Number(currentPrice) || Number(originalPrice),
       originalPrice: Number(originalPrice) || Number(currentPrice),
       priceHistory: [],
-      discountRate: Number(discountRate),
-      // category: 'category',
-      // reviewsCount: 100,
-      // stars: 4.5,
-      // isOutOfStock: outOfStock,
       lowestPrice: Number(currentPrice) || Number(originalPrice),
       highestPrice: Number(originalPrice) || Number(currentPrice),
       averagePrice: Number(currentPrice) || Number(originalPrice),
     }
-
+    console.log(data)
     return data;
   } catch (error: any) {
     console.log(error);

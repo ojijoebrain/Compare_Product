@@ -14,14 +14,15 @@ export function extractPrice(...elements: any) {
   for (const element of elements) {
     const priceText = element.text().trim();
 
-    if(priceText) {
+    if (priceText) {
       const cleanPrice = priceText.replace(/[^\d.]/g, '');
 
-      let firstPrice; 
+      let firstPrice;
 
       if (cleanPrice) {
-        firstPrice = cleanPrice.match(/\d+\.\d{2}/)?.[0];
-      } 
+        firstPrice = cleanPrice.match(/(\d{1,3}(?:,\d{1,3})*)/);
+        firstPrice = firstPrice[0]
+      }
 
       return firstPrice || cleanPrice;
     }
@@ -29,6 +30,25 @@ export function extractPrice(...elements: any) {
 
   return '';
 }
+// export function extractPrice(...elements: any) {
+//   for (const element of elements) {
+//     const priceText = element.text().trim();
+
+//     if (priceText) {
+//       const cleanPrice = priceText.replace(/[^\d.]/g, '');
+
+//       let firstPrice;
+
+//       if (cleanPrice) {
+//         firstPrice = cleanPrice.match(/\d+\.\d{2}/)?.[0];
+//       }
+
+//       return cleanPrice;
+//     }
+//   }
+
+//   return '';
+// }
 
 
 export function getHighestPrice(priceList: PriceHistoryItem[]) {
