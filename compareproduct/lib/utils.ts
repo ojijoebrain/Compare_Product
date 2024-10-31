@@ -17,7 +17,7 @@ export function extractPrice(...elements: any) {
     if (priceText) {
       const cleanPrice = priceText.replace(/[^\d.]/g, '');
       const firstPrice = cleanPrice.substring(0, 6);
-     
+
       return firstPrice || cleanPrice;
     }
   }
@@ -54,4 +54,11 @@ export function getAveragePrice(priceList: PriceHistoryItem[]) {
   const averagePrice = sumOfPrices / priceList.length || 0;
 
   return averagePrice;
+}
+
+export const formatNumber = (num: number = 0) => {
+  return num.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
 }

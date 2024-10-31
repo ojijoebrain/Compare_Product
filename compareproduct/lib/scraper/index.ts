@@ -17,22 +17,18 @@ export async function scrapeProduct(url: string) {
 
     // Extract the product title
     const title = $('h4._24849_2Ymhg').text().trim();
-    const currentPrice = extractPrice($('div._678e4_e6nqh > div'));
-    // const currentPrice = currentPrice0.substring(0, 6);
 
+    // const currency = $(('div._678e4_e6nqh > div > span'))
+
+    const currentPrice = extractPrice($('div._678e4_e6nqh > div'));
 
     const originalPrice = extractPrice($('div._10344_3PAla > div'));
-    // const originalPrice = originalPrice0.substring(0, 6);
-
-    const image = $('picture img[data-expand="100"]').attr('src') || '{}';
-
-    const imageUrl = Object.keys(JSON.parse(image));
 
     // Construct data object with scraped information
     const data = {
       url,
-      image: image,
       title,
+      // currency,
       currentPrice: Number(currentPrice) || Number(originalPrice),
       originalPrice: Number(originalPrice) || Number(currentPrice),
       priceHistory: [],
@@ -40,6 +36,7 @@ export async function scrapeProduct(url: string) {
       highestPrice: Number(originalPrice) || Number(currentPrice),
       averagePrice: Number(currentPrice) || Number(originalPrice),
     }
+    // console.log(currency)
     console.log(data)
     return data;
   } catch (error: any) {
