@@ -16,40 +16,14 @@ export function extractPrice(...elements: any) {
 
     if (priceText) {
       const cleanPrice = priceText.replace(/[^\d.]/g, '');
-
-      let firstPrice;
-
-      if (cleanPrice) {
-        firstPrice = cleanPrice.match(/(\d{1,3}(?:,\d{1,3})*)/);
-        firstPrice = firstPrice[0]
-      }
-
+      const firstPrice = cleanPrice.substring(0, 6);
+     
       return firstPrice || cleanPrice;
     }
   }
 
   return '';
 }
-// export function extractPrice(...elements: any) {
-//   for (const element of elements) {
-//     const priceText = element.text().trim();
-
-//     if (priceText) {
-//       const cleanPrice = priceText.replace(/[^\d.]/g, '');
-
-//       let firstPrice;
-
-//       if (cleanPrice) {
-//         firstPrice = cleanPrice.match(/\d+\.\d{2}/)?.[0];
-//       }
-
-//       return cleanPrice;
-//     }
-//   }
-
-//   return '';
-// }
-
 
 export function getHighestPrice(priceList: PriceHistoryItem[]) {
   let highestPrice = priceList[0];
