@@ -34,7 +34,7 @@ const Home = async () => {
             </p>
             {/* Searchbar component placeholder */}
             <Searchbar />
-            <div className="mt-6">Searchbar</div>
+            {/* <div className="mt-6">Searchbar</div> */}
           </div>
 
           {/* HeroCarousel component placeholder */}
