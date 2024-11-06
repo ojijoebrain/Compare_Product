@@ -5,7 +5,7 @@ Oji Joseph Oji - Frontend Developer
 Lovette Duke - Backend Developer
 
 ## Introduction 
-Compare_Product is a web application designed to help users compare products quickly and effectively. By offering detailed comparisons on features, prices, reviews, and expert ratings, our platform empowers users to make well-informed purchasing decisions.
+Compare_Product is a web application designed to help users compare product prices quickly and effectively. By offering detailed comparisons on prices, reviews, and ratings, our platform empowers users to make well-informed purchasing decisions.
 
 ## TECH STACK
 # Frontend Technologies:
@@ -13,21 +13,31 @@ Compare_Product is a web application designed to help users compare products qui
 .Tailwind CSS: For efficient and responsive styling.
 
 # Backend Technologies:
-.Node.js & Express: For server and API handling.
-.MongoDB: Database for storing and retrieving product data.
+. Next.js & Javascript libraries  (axios for scraping , cheerio to parse data, mongoose for connection to database) 
+. MongoDB: Database for storing and retrieving product data.
+
 
 # Other Tools:
-.GitHub: Version control and collaboration.
-.Mongoose: For MongoDB object modeling.
-.Image Optimization: Using Next.js Image component.
+. GitHub: Version control and collaboration.
+. Trello
+. MongoDB Atlas: Cloud database
+
 
 ## FEATURES
-.Product Comparison:  Users can view side-by-side comparisons of selected products.
-.Search Functionality:  Quickly search products to add to the comparison table.
-.Trending Products Section: Highlights popular products.
+. Product Comparison: Users can view side-by-side comparisons of selected products prices.
 . Product Details Page: Provides detailed information on each product.
+. Product Scraping: A search bar allowing users to input Konga product links for scraping.
+. Scraped Projects: Displays the details of products scraped so far, offering insights into tracked items.
+. Scraped Product Details: Showcase the product title, pricing, details, and other relevant information scraped from the original website
+
 
 ## Getting Started
+# Follow these steps to set up the project locally on your machine.
+
+..Make sure you have the following installed on your machine:
+
+Node.js
+npm (Node Package Manager)
 
 First, run the development server:
 
